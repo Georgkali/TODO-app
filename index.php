@@ -4,9 +4,10 @@ require 'vendor/autoload.php';
 
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
-    $r->addRoute('GET', '/', 'dataController');
-    $r->addRoute('POST', '/', 'addRecordController');
-    $r->addRoute('POST', '/delete', 'DeleteRecordController');
+    $r->addRoute('GET', '/', 'dataController@index');
+    $r->addRoute('POST', '/add', 'dataController@addRecord');
+    $r->addRoute('POST', '/del', 'dataController@delete');
+
 
 });
 
@@ -32,9 +33,9 @@ switch ($routeInfo[0]) {
     case FastRoute\Dispatcher::FOUND:
         $handler = $routeInfo[1];
         $vars = $routeInfo[2];
-        $controller = 'App\Controllers\\' . $handler;
+        [$controller, $method] = explode("@", $handler);
+        $controller = 'App\Controllers\\' . $controller;
         $controller = new $controller();
-        $controller->index();
-        //var_dump($routeInfo);
+        $controller->$method();
         break;
 }

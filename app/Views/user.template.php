@@ -8,24 +8,23 @@
     <title>TO DO list</title>
 </head>
 <h1>TO DO list</h1>
-<form action="/" method="post">
-    <input type="text" name="item">
-    <button type="submit">Submit</button>
-</form>
-<br>
-<form action="/delete" method="post">
-    <input type="number" name="itemToDelete">
-    <button type="submit">Delete</button>
-</form>
-
+<pre>
 <?php
-//var_dump($data);
-foreach ($data as $key => $record) {
-    echo "<p>$key $record[0]</p>";
+//var_dump($records);
+?>
+</pre>
+
+<?php foreach ($records as $key => $record) {
+
+    echo "<p> $key |  {$record->getDescription()} {$record->getStatus()} </p> 
+<form action='/del' method='post'><button type='submit' name='id' value='{$record->getId()}'>X</button></form> ";
 }
 ?>
 
-
+<form action="/add" method="post">
+    <input type="text" name="description">
+    <button type="submit">Add</button>
+</form>
 
 <body>
 

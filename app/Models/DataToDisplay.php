@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\Storage;
 
 class DataToDisplay
 {
