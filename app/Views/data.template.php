@@ -8,11 +8,12 @@
     <title>TO DO list</title>
 </head>
 <h1>TO DO list</h1>
-<pre>
+
 <?php
-//var_dump($records);
+
+var_dump($user);
+
 ?>
-</pre>
 
 <?php foreach ($records as $key => $record) {
 

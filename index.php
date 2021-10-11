@@ -1,12 +1,16 @@
 <?php
-
+session_start();
 require 'vendor/autoload.php';
 
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'dataController@index');
+    $r->addRoute('GET', '/data', 'dataController@data');
+    $r->addRoute('GET', '/registration', 'dataController@registration');
     $r->addRoute('POST', '/add', 'dataController@addRecord');
     $r->addRoute('POST', '/del', 'dataController@delete');
+    $r->addRoute('POST', '/register', 'dataController@addUser');
+    $r->addRoute('POST', '/login', 'dataController@login');
 
 
 });
@@ -39,3 +43,4 @@ switch ($routeInfo[0]) {
         $controller->$method();
         break;
 }
+session_destroy();

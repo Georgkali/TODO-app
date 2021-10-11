@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Models\Record;
 use App\Models\RecordsCollection;
 use PDO;
-use Ramsey\Uuid\Uuid;
 
 class MysqlRecordsRepository implements RecordsRepository
 
