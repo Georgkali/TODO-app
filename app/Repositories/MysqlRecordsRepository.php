@@ -13,7 +13,11 @@ class MysqlRecordsRepository implements RecordsRepository
 
     public function __construct()
     {
-        $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=Todo', 'root', '');
+        try {
+            $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=Todo', 'root', '');
+        } catch (\PDOException $e) {
+            die('Could not connect.');
+        }
     }
 
     public function getRecords(): RecordsCollection
