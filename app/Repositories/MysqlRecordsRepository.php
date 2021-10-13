@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Record;
 use App\Models\RecordsCollection;
 use PDO;
+use PDOException;
 
 class MysqlRecordsRepository implements RecordsRepository
 
@@ -15,7 +16,7 @@ class MysqlRecordsRepository implements RecordsRepository
     {
         try {
             $this->pdo = new PDO('mysql:host=127.0.0.1;dbname=Todo', 'root', '');
-        } catch (\PDOException $e) {
+        } catch (PDOException $e) {
             die('Could not connect.');
         }
     }

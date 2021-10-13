@@ -43,4 +43,3 @@ switch ($routeInfo[0]) {
         $controller->$method();
         break;
 }
-session_destroy();
