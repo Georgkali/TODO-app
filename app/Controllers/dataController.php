@@ -9,6 +9,7 @@ use App\Repositories\MysqlRecordsRepository;
 use App\Repositories\UsersRepository;
 use Ramsey\Uuid\Uuid;
 
+
 class dataController
 {
     private MysqlRecordsRepository $records;
@@ -24,12 +25,12 @@ class dataController
 
     public function index()
     {
-        require_once 'app/Views/index.template.php';
+
     }
 
     public function registration()
     {
-        require_once 'app/Views/registration.template.php';
+
     }
 
     public function login()
@@ -52,14 +53,12 @@ class dataController
 
     }
 
-    public function data()
+    public function data(): array
     {
-
-        $records = $this->records->getRecords()->getRecords();
-        require_once 'app/Views/data.template.php';
+        return $this->records->getRecords()->getRecords();
     }
 
-    public function addRecord()
+    public function addRec()
 
     {
 
@@ -67,8 +66,7 @@ class dataController
             Uuid::uuid4(),
             $_POST['description'],
             Record::CREATED));
-        require_once 'app/Views/data.template.php';
-        header("location: /data");
+       // header("location: /data");
     }
 
     public function delete()
@@ -84,13 +82,15 @@ class dataController
 
     public function addUser()
     {
+
         if (isset($_POST['username']) && isset($_POST['email']) && $_POST['password'] === $_POST['passwordRepeat']) {
+
             $user = new User($_POST['username'], $_POST['email'], password_hash($_POST['password'], PASSWORD_BCRYPT));
             $this->users->addUser($user);
             header("location: /");
         } else {
-            echo "Check Your inputs!";
-            require_once 'app/Views/registration.template.php';
+
+            require_once 'app/Views/registration.html.twig';
             header("location /registration");
         }
 

@@ -8,7 +8,7 @@ use PDO;
 
 class UsersRepository
 {
-    private PDO  $pdo;
+    private PDO $pdo;
 
     public function __construct()
     {
@@ -19,10 +19,11 @@ class UsersRepository
     {
         $sql = "INSERT INTO users(username, email, password) VALUES (?,?,?)";
         $statement = $this->pdo->prepare($sql);
-        $statement->execute([$user->getName() ,$user->getEmail(), $user->getPassword()]);
+        $statement->execute([$user->getName(), $user->getEmail(), $user->getPassword()]);
     }
 
-    public function getUsers(): UsersCollection {
+    public function getUsers(): UsersCollection
+    {
         $db = $this->pdo->query('SELECT * FROM users');
         $db->execute();
         $users = $db->fetchAll(PDO::FETCH_ASSOC);

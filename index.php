@@ -2,12 +2,18 @@
 session_start();
 require 'vendor/autoload.php';
 
+use Twig\Environment;
+use Twig\Loader\FilesystemLoader;
+use App\Controllers\dataController;
+$dataController = new dataController();
+$loader = new FilesystemLoader('app/Views/');
+$twig = new Environment($loader);
 
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
     $r->addRoute('GET', '/', 'dataController@index');
     $r->addRoute('GET', '/data', 'dataController@data');
     $r->addRoute('GET', '/registration', 'dataController@registration');
-    $r->addRoute('POST', '/add', 'dataController@addRecord');
+    $r->addRoute('POST', '/add', 'dataController@addRec');
     $r->addRoute('POST', '/del', 'dataController@delete');
     $r->addRoute('POST', '/register', 'dataController@addUser');
     $r->addRoute('POST', '/login', 'dataController@login');
@@ -41,5 +47,10 @@ switch ($routeInfo[0]) {
         $controller = 'App\Controllers\\' . $controller;
         $controller = new $controller();
         $controller->$method();
+        echo $twig->render( "$method.html.twig", ['data' => $dataController->$method()]);
+        var_dump($dataController->$method());
         break;
 }
+
+
+

@@ -1,0 +1,20 @@
+
+
+{%  include 'modules/header.html.twig' %}
+
+{% for record in data %}
+
+<p>  {{ record.description }}  {{record.getStatus}} </p>
+<form action='/del' method='post'><button type='submit' name='id' value='{{ record.id }}'>X</button></form>
+
+{% endfor %}
+
+{% include 'add.html.twig' %}
+
+
+
+
+<body>
+
+</body>
+</html>
