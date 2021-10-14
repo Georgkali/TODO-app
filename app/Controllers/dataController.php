@@ -66,7 +66,7 @@ class dataController
             Uuid::uuid4(),
             $_POST['description'],
             Record::CREATED));
-       // header("location: /data");
+       header("location: /data");
     }
 
     public function delete()

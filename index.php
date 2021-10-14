@@ -46,9 +46,7 @@ switch ($routeInfo[0]) {
         [$controller, $method] = explode("@", $handler);
         $controller = 'App\Controllers\\' . $controller;
         $controller = new $controller();
-        $controller->$method();
         echo $twig->render( "$method.html.twig", ['data' => $dataController->$method()]);
-        var_dump($dataController->$method());
         break;
 }
 
